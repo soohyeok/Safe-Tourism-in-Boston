@@ -53,34 +53,34 @@ Although we have different datasets of polygons and points, our current project 
 
 ### non-trivial constraint satisfaction or optimization technique (Project#2)
 - There are different variation for the k-means for the different visualization we are preparing for project#3
-#### k-means_landmark.py
+#### *k-means_landmark.py*:
 - K-means algorithm for finding clusters of landmarks
 - locates K coordinates that are centers of the found clusters 
-#### k-means_landmark_crime.py
+#### *k-means_landmark_crime.py*:
 - K-means algorithm for finding clusters of landmarks
 - landmark coordinates close to crime coordinates are removed
 - locates K coordinates that are centers of the found clusters
-#### k-means_landmark_transportation.py
+#### *k-means_landmark_transportation.py*:
 - K-means algorithm for finding clusters of landmarks and transporations (bus & train)
 - locates K coordinates that are centers of the found clusters 
-#### k-means_landmark_transportation_crime.py
+#### *k-means_landmark_transportation_crime.py*:
 - K-means algorithm for finding clusters of landmarks and trasnportations (bus & train) where
 - landmark or transporation coordinates close to crime coordinates are removed 
 - locates K coordinates that are centers of the found clusters 
 
 ### statistical analysis or inference algorithm (Project#2)
 - There are different variation for the stats alg for the different visualization we are preparing for project#3
-#### stat_landmark.py
+#### *stat_landmark.py*:
 - finds the averaging center point of landmarks based on each neighborhood's landmark coordinates
 - then finds the average distance to each landmark to the found coordinate
-#### stat_landmark_crime.py
+#### *stat_landmark_crime.py*:
 - landmark coordinates near crime coordinates are removed
 - finds the averaging center point of landmarks based on each neighborhood's landmark coordinates
 - then finds the average distance to each landmark to the found coordinate
-#### stat_landmark_transportation.py
+#### *stat_landmark_transportation.py*:
 - finds the averaging center point of landmarks and transportations based on each neighborhood's landmark coordinates and transportation coordinates
 - then finds the average distance to each landmarks and transporations to the found coordinates
-#### stat_landmark_transportation_crime.py
+#### *stat_landmark_transportation_crime.py*:
 - landmark coordinates near crime coordinates are removed
 - finds the averaging center point of landmarks and transportations based on each neighborhood's landmark coordinates and transportation coordinates
 - then finds the average distance to each landmarks and transporations to the found coordinates
