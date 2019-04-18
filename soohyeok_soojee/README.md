@@ -67,6 +67,7 @@ Also, we created different variations for the K-means and stats algorithm for us
 #### *k-means_landmark.py*:
 - K-means algorithm for finding clusters of landmarks
 - locates K coordinates that are centers of the found clusters 
+![](kmeans_landmark.png)
 #### *k-means_landmark_crime.py*:
 - K-means algorithm for finding clusters of landmarks
 - landmark coordinates close to crime coordinates are removed
