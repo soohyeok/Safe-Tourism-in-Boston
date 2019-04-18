@@ -72,13 +72,16 @@ Also, we created different variations for the K-means and stats algorithm for us
 - K-means algorithm for finding clusters of landmarks
 - landmark coordinates close to crime coordinates are removed
 - locates K coordinates that are centers of the found clusters
+![](kmeans_landmark_crime.png)
 #### *k-means_landmark_transportation.py*:
 - K-means algorithm for finding clusters of landmarks and transporations (bus & train)
-- locates K coordinates that are centers of the found clusters 
+- locates K coordinates that are centers of the found clusters
+![](kmeans_landmark_transportation.png)
 #### *k-means_landmark_transportation_crime.py*:
 - K-means algorithm for finding clusters of landmarks and trasnportations (bus & train) where
 - landmark or transporation coordinates close to crime coordinates are removed 
 - locates K coordinates that are centers of the found clusters 
+![](kmeans_landmark_transportation_crime.png)
 
 ### statistical analysis or inference algorithm:
 - There are different variation for the stats alg for the different visualization we are preparing for project#3
