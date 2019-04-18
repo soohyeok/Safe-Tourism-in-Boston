@@ -48,19 +48,19 @@ Also, we created different variations for the K-means and stats algorithm for us
 - Pulls dataset of polygons from *get_neighborhoods.py*
 - Pulls dataset of polygons from *get_landmarks.py*
 - Polygon datset of landmarks is averaged into points
-- Now that we have points, checks and counts where the crime points are marked within the neighborhood polygons.
+- Now that we have points, checks where the crime points are marked within the neighborhood polygons.
 
 #### *transform_crime.py* (file name-changed and updated from *crimeRate.py*):
 - Pulls dataset of polygons from *get_neighborhoods.py*
 - Pulls dataset of points from *get_crimeData.py*
-- Checks and counts where the crime occurred within which polygons of neighborhoods.
+- Checks  where the crime occurred within which polygons of neighborhoods.
 
 #### *transform_transportation.py* (file name-changed and updated from *transportation.py*):
 - Pulls dataset of polygons from *get_neighborhoods.py*
 - Pulls dataset of points from *get_trainStations.py*
 - Pulls dataset of points from *get_busStops.py*
 - Merges two dataset of points of bus and train
-- Checks and counts where the bus stops and trainstations are within which polygons of neighborhoods.
+- Checks where the bus stops and trainstations are within which polygons of neighborhoods.
 
 ### non-trivial constraint satisfaction or optimization technique:
 - There are different variation for the k-means for the different visualization we are preparing for project#3
@@ -103,7 +103,7 @@ Also, we created different variations for the K-means and stats algorithm for us
 ### Execution Script for Provenance.html:
 To execute all the algorithms for the project in an order that respects their explicitly specified data flow dependencies, run the following from the root directory:
 ```
-python execute.py soohyeok_soojee
+python3 execute.py soohyeok_soojee
 ```
 
 ### Note:
