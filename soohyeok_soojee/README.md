@@ -31,27 +31,29 @@ We currently put together the few datasets listed above and transformed the acqu
 - has low crime rates.
 
 Although we have different datasets of polygons and points, our current project model is heavily dependent on geolocation datsets. We are currently researching on possible datasets to incorporate into our project to further develop user experience.
+#### (*Project#2 justification*)
+We needed a way to rate the neighborhoods somehow based on the coordinate datas we have collected. The problem is that we have each neighborhood's landmark coordinates, public tranportation coordiantes and crime coordiantes (where crime occured) but we do not have a way to compare a neighborhood to another neighborhood.
 
-### Transformation (Project#1):  
-#### *transform_landmark.py*:
+### Transformation:  
+#### *transform_landmark.py* (file name-changed and updated from *landmarkRate.py*):
 - Pulls dataset of polygons from *get_neighborhoods.py*
 - Pulls dataset of polygons from *get_landmarks.py*
 - Polygon datset of landmarks is averaged into points
 - Now that we have points, checks and counts where the crime points are marked within the neighborhood polygons.
 
-#### *transform_crime.py*:
+#### *transform_crime.py* (file name-changed and updated from *crimeRate.py*):
 - Pulls dataset of polygons from *get_neighborhoods.py*
 - Pulls dataset of points from *get_crimeData.py*
 - Checks and counts where the crime occurred within which polygons of neighborhoods.
 
-#### *transform_transportation.py*:
+#### *transform_transportation.py* (file name-changed and updated from *transportation.py*):
 - Pulls dataset of polygons from *get_neighborhoods.py*
 - Pulls dataset of points from *get_trainStations.py*
 - Pulls dataset of points from *get_busStops.py*
 - Merges two dataset of points of bus and train
 - Checks and counts where the bus stops and trainstations are within which polygons of neighborhoods.
 
-### non-trivial constraint satisfaction or optimization technique (Project#2)
+### non-trivial constraint satisfaction or optimization technique:
 - There are different variation for the k-means for the different visualization we are preparing for project#3
 #### *k-means_landmark.py*:
 - K-means algorithm for finding clusters of landmarks
@@ -68,7 +70,7 @@ Although we have different datasets of polygons and points, our current project 
 - landmark or transporation coordinates close to crime coordinates are removed 
 - locates K coordinates that are centers of the found clusters 
 
-### statistical analysis or inference algorithm (Project#2)
+### statistical analysis or inference algorithm:
 - There are different variation for the stats alg for the different visualization we are preparing for project#3
 #### *stat_landmark.py*:
 - finds the averaging center point of landmarks based on each neighborhood's landmark coordinates
