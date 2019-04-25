@@ -6,8 +6,6 @@ import datetime
 import uuid
 from shapely.geometry import Point, MultiPolygon, shape
 import numpy as np
-from scipy.spatial import distance
-
 
 class stat_landmark_transportation_crime(dml.Algorithm):
     contributor = 'soohyeok_soojee'
@@ -27,15 +25,13 @@ class stat_landmark_transportation_crime(dml.Algorithm):
         neighborhoodData = repo['soohyeok_soojee.get_neighborhoods'].find()
         Coordinates = repo['soohyeok_soojee.kmeans_landmark_transportation_crime'].find()[0]['Coordinates']
 
-        if(trial == True):
-            neighborhoodData = neighborhoodData.sample(frac=.05)
-            Coordinates = Coordinates.sample(frac=.05)
-
         def average(x):
             return sum(x)/len(x)
 
-        def takeSecond(x):
-            return x[1]
+        def distance(a,b):
+            (x1,y1) = a
+            (x2,y2) = b
+            return ((x1-x2)**2 + (y1-y2)**2)**.5
 
         neighborhoods = {}
         for n in neighborhoodData:
@@ -44,10 +40,11 @@ class stat_landmark_transportation_crime(dml.Algorithm):
 
         avg = {}
         for name in Coordinates:
+            center = neighborhoods[name]
+            points = Coordinates[name]
             if Coordinates[name] != []:
-                dist = [distance.euclidean(neighborhoods[name], point) for list in Coordinates[name] for point in list]
+                dist = [distance(center, p) for p in points]
                 avg[name] = average(dist)
-
         result = [avg]
 
         repo.dropCollection("stat_landmark_transportation_crime")
@@ -107,8 +104,8 @@ class stat_landmark_transportation_crime(dml.Algorithm):
 
 # This is example code you might use for debugging this module.
 # Please remove all top-level function calls before submitting.
-stat_landmark_transportation_crime.execute()
-doc = stat_landmark_transportation_crime.provenance()
+# stat_landmark_transportation_crime.execute()
+# doc = stat_landmark_transportation_crime.provenance()
 # print(doc.get_provn())
 # print(json.dumps(json.loads(doc.serialize()), indent=4))
 

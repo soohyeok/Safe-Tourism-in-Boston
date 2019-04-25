@@ -24,6 +24,9 @@ class transform_transportation(dml.Algorithm):
         neighborhoodData = repo['soohyeok_soojee.get_neighborhoods'].find()
         trainStationsData = repo['soohyeok_soojee.get_trainStations'].find()
         busStopsData = repo['soohyeok_soojee.get_busStops'].find()
+        if trial:
+            trainStationsData = repo['soohyeok_soojee.get_trainStations'].find().limit(50)
+            busStopsData = repo['soohyeok_soojee.get_busStops'].find().limit(800)
 
         # select town name and coordinates
         neighborhoods = {}
@@ -105,8 +108,8 @@ class transform_transportation(dml.Algorithm):
 
 # This is example code you might use for debugging this module.
 # Please remove all top-level function calls before submitting.
-transform_transportation.execute()
-doc = transform_transportation.provenance()
+# transform_transportation.execute()
+# doc = transform_transportation.provenance()
 # print(doc.get_provn())
 # print(json.dumps(json.loads(doc.serialize()), indent=4))
 

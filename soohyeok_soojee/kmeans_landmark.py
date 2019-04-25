@@ -7,9 +7,7 @@ import uuid
 from shapely.geometry import Point, MultiPolygon, shape
 import numpy as np
 from sklearn.cluster import KMeans
-from scipy.spatial import distance
 from matplotlib import pyplot
-
 
 class kmeans_landmark(dml.Algorithm):
     contributor = 'soohyeok_soojee'
@@ -29,32 +27,23 @@ class kmeans_landmark(dml.Algorithm):
         neighborhoodData = repo['soohyeok_soojee.get_neighborhoods'].find()
         LandmarkAndTown = repo['soohyeok_soojee.transform_landmark'].find()[0]['LandmarkAndTown']
 
-        if(trial == True):
-            neighborhoodData = neighborhoodData.sample(frac=.05)
-            LandmarkAndTown = LandmarkAndTown.sample(frac=.05)
-
         neighborhoods = {}
         for n in neighborhoodData:
             key = n['properties']['Name']
             neighborhoods[key] = n['geometry']
 
-
-        # data = AllCoordOfLandmark
         data = [point for name in LandmarkAndTown for point in LandmarkAndTown[name]]
 
         # kmean plot
         kmeans = KMeans(n_clusters=10).fit(data)
         data = np.array(data)
-        pyplot.scatter(data[:,0], data[:,1], c=kmeans.labels_)
-        pyplot.scatter(kmeans.cluster_centers_[:,0], kmeans.cluster_centers_[:,1], marker='x', c='red')
-        pyplot.show()
-        pyplot.savefig('kmeans_landmark.png')
-
+        # pyplot.scatter(data[:,0], data[:,1], c=kmeans.labels_)
+        # pyplot.scatter(kmeans.cluster_centers_[:,0], kmeans.cluster_centers_[:,1], marker='x', c='red')
+        # pyplot.show()
 
         centroid = [[x[0],x[1]] for x in kmeans.cluster_centers_]
         towns = [name for name in neighborhoods for point in centroid if Point(point).within(shape(neighborhoods[name]))]
         result = {'centroid': centroid, 'towns':towns, 'Coordinates': LandmarkAndTown}
-
 
         repo.dropCollection("kmeans_landmark")
         repo.createCollection("kmeans_landmark")
@@ -113,8 +102,8 @@ class kmeans_landmark(dml.Algorithm):
 
 # This is example code you might use for debugging this module.
 # Please remove all top-level function calls before submitting.
-kmeans_landmark.execute()
-doc = kmeans_landmark.provenance()
+# kmeans_landmark.execute()
+# doc = kmeans_landmark.provenance()
 # print(doc.get_provn())
 # print(json.dumps(json.loads(doc.serialize()), indent=4))
 

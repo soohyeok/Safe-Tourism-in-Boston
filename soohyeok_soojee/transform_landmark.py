@@ -23,6 +23,8 @@ class transform_landmark(dml.Algorithm):
 
         neighborhoodData = repo['soohyeok_soojee.get_neighborhoods'].find()
         landmarkData = repo['soohyeok_soojee.get_landmarks'].find()
+        if trial:
+            landmarkData = repo['soohyeok_soojee.get_landmarks'].find().limit(700)
 
         # select town name and coordinates
         neighborhoods = {}
@@ -34,6 +36,7 @@ class transform_landmark(dml.Algorithm):
 
         coordinates = [shape(l['geometry']) for l in landmarkData]
         LandmarkLocations = [[point.centroid.x, point.centroid.y] for point in coordinates]
+
         for point in coordinates:
             for name in neighborhoods:
                 if point.centroid.within(shape(neighborhoods[name])):
@@ -98,8 +101,8 @@ class transform_landmark(dml.Algorithm):
 
 # This is example code you might use for debugging this module.
 # Please remove all top-level function calls before submitting.
-transform_landmark.execute()
-doc = transform_landmark.provenance()
+# transform_landmark.execute()
+# doc = transform_landmark.provenance()
 # print(doc.get_provn())
 # print(json.dumps(json.loads(doc.serialize()), indent=4))
 

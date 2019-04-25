@@ -7,9 +7,7 @@ import uuid
 from shapely.geometry import Point, MultiPolygon, shape
 import numpy as np
 from sklearn.cluster import KMeans
-from scipy.spatial import distance
 from matplotlib import pyplot
-
 
 class kmeans_landmark_transportation(dml.Algorithm):
     contributor = 'soohyeok_soojee'
@@ -30,11 +28,6 @@ class kmeans_landmark_transportation(dml.Algorithm):
         LandmarkAndTown = repo['soohyeok_soojee.transform_landmark'].find()[0]['LandmarkAndTown']
         TransportationAndTown = repo['soohyeok_soojee.transform_transportation'].find()[0]['TransportationAndTown']
 
-        if(trial == True):
-            neighborhoodData = neighborhoodData.sample(frac=.05)
-            LandmarkAndTown = LandmarkAndTown.sample(frac=.05)
-            TransportationAndTown = TransportationAndTown.sample(frac=.05)
-
         neighborhoods = {}
         merge = {}
         for n in neighborhoodData:
@@ -44,23 +37,19 @@ class kmeans_landmark_transportation(dml.Algorithm):
 
         data = []
         for name in neighborhoods:
-            data += LandmarkAndTown[name]
-            data += TransportationAndTown[name]
+            data += LandmarkAndTown[name] + TransportationAndTown[name]
             merge[name] = LandmarkAndTown[name]+TransportationAndTown[name]
 
         kmeans = KMeans(n_clusters=10).fit(data)
         data = np.array(data)
-        pyplot.scatter(data[:,0], data[:,1], c=kmeans.labels_)
-        pyplot.scatter(kmeans.cluster_centers_[:,0], kmeans.cluster_centers_[:,1], marker='x', c='red')
-        pyplot.show()
-        pyplot.savefig('kmeans_landmark_transportation.png')
+        # pyplot.scatter(data[:,0], data[:,1], c=kmeans.labels_)
+        # pyplot.scatter(kmeans.cluster_centers_[:,0], kmeans.cluster_centers_[:,1], marker='x', c='red')
+        # pyplot.show()
 
 
         centroid = [[x[0],x[1]] for x in kmeans.cluster_centers_]
         towns = [name for name in neighborhoods for point in centroid if Point(point).within(shape(neighborhoods[name]))]
         result = {'centroid': centroid, 'towns':towns, 'Coordinates': merge}
-        # print(towns)
-
 
         repo.dropCollection("kmeans_landmark_transportation")
         repo.createCollection("kmeans_landmark_transportation")
@@ -126,8 +115,8 @@ class kmeans_landmark_transportation(dml.Algorithm):
 
 # This is example code you might use for debugging this module.
 # Please remove all top-level function calls before submitting.
-kmeans_landmark_transportation.execute()
-doc = kmeans_landmark_transportation.provenance()
+# kmeans_landmark_transportation.execute()
+# doc = kmeans_landmark_transportation.provenance()
 # print(doc.get_provn())
 # print(json.dumps(json.loads(doc.serialize()), indent=4))
 

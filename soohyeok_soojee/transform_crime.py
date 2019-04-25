@@ -22,7 +22,9 @@ class transform_crime(dml.Algorithm):
         repo.authenticate('soohyeok_soojee', 'soohyeok_soojee')
 
         neighborhoodData = repo['soohyeok_soojee.get_neighborhoods'].find()
-        crimeData = repo['soohyeok_soojee.get_crimeData'].find()
+        crimeData = repo['soohyeok_soojee.get_crimeData'].find().limit(2000)
+        if trial:
+            crimeData = repo['soohyeok_soojee.get_crimeData'].find().limit(150)
 
         # select town name and coordinates
         neighborhoods = {}
@@ -44,6 +46,7 @@ class transform_crime(dml.Algorithm):
             for name in neighborhoods:
                 if Point(point).within(shape(neighborhoods[name])):
                     CrimeAndTown[name] += [point]
+
 
         result = {'coordinates': CrimeLocations, 'CrimeAndTown': CrimeAndTown}
 
@@ -104,8 +107,8 @@ class transform_crime(dml.Algorithm):
 
 # This is example code you might use for debugging this module.
 # Please remove all top-level function calls before submitting.
-transform_crime.execute()
-doc = transform_crime.provenance()
+# transform_crime.execute()
+# doc = transform_crime.provenance()
 # print(doc.get_provn())
 # print(json.dumps(json.loads(doc.serialize()), indent=4))
 

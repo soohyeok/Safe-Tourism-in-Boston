@@ -7,9 +7,7 @@ import uuid
 from shapely.geometry import Point, MultiPolygon, shape
 import numpy as np
 from sklearn.cluster import KMeans
-from scipy.spatial import distance
 from matplotlib import pyplot
-
 
 class kmeans_landmark_transportation_crime(dml.Algorithm):
     contributor = 'soohyeok_soojee'
@@ -31,12 +29,6 @@ class kmeans_landmark_transportation_crime(dml.Algorithm):
         TransportationAndTown = repo['soohyeok_soojee.transform_transportation'].find()[0]['TransportationAndTown']
         CrimeAndTown = repo['soohyeok_soojee.transform_crime'].find()[0]['CrimeAndTown']
 
-        if(trial == True):
-            neighborhoodData = neighborhoodData.sample(frac=.05)
-            LandmarkAndTown = LandmarkAndTown.sample(frac=.05)
-            TransportationAndTown = TransportationAndTown.sample(frac=.05)
-            CrimeAndTown = CrimeAndTown.sample(frac=.05)
-
         neighborhoods = {}
         merge = {}
         for n in neighborhoodData:
@@ -47,22 +39,26 @@ class kmeans_landmark_transportation_crime(dml.Algorithm):
         for name in neighborhoods:
             merge[name] = LandmarkAndTown[name] + TransportationAndTown[name]
 
+        def distance(a,b):
+            (x1,y1) = a
+            (x2,y2) = b
+            return ((x1-x2)**2 + (y1-y2)**2)**.5
+
         for name in CrimeAndTown:
             for point in CrimeAndTown[name]:
-                dist = [[distance.euclidean(point,x)] for x in merge[name]]
+                dist = [[distance(point,x)] for x in merge[name]]
                 if dist != []:
                     index = np.argmin(dist)
                     p = merge[name][index]
                     merge[name].remove(p)
-        data = []
+
         data = [point for name in merge for point in merge[name]]
 
         kmeans = KMeans(n_clusters=10).fit(data)
         data = np.array(data)
-        pyplot.scatter(data[:,0], data[:,1], c=kmeans.labels_)
-        pyplot.scatter(kmeans.cluster_centers_[:,0], kmeans.cluster_centers_[:,1], marker='x', c='red')
-        pyplot.show()
-        pyplot.savefig('kmeans_landmark_transportation_crime.png')
+        # pyplot.scatter(data[:,0], data[:,1], c=kmeans.labels_)
+        # pyplot.scatter(kmeans.cluster_centers_[:,0], kmeans.cluster_centers_[:,1], marker='x', c='red')
+        # pyplot.show()
 
         centroid = [[x[0],x[1]] for x in kmeans.cluster_centers_]
         towns = [name for name in neighborhoods for point in centroid if Point(point).within(shape(neighborhoods[name]))]
@@ -149,8 +145,8 @@ class kmeans_landmark_transportation_crime(dml.Algorithm):
 
 # This is example code you might use for debugging this module.
 # Please remove all top-level function calls before submitting.
-kmeans_landmark_transportation_crime.execute()
-doc = kmeans_landmark_transportation_crime.provenance()
+# kmeans_landmark_transportation_crime.execute()
+# doc = kmeans_landmark_transportation_crime.provenance()
 # print(doc.get_provn())
 # print(json.dumps(json.loads(doc.serialize()), indent=4))
 
