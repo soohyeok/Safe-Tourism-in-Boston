@@ -37,8 +37,8 @@ class stat_landmark_transportation(dml.Algorithm):
 
         neighborhoods = {}
         for n in neighborhoodData:
-            key = n['properties']['Name']
-            neighborhoods[key] = [shape(n['geometry']).centroid.x, shape(n['geometry']).centroid.y]
+            key = n['properties']['DISTRICT']
+            neighborhoods[str(key)] = [shape(n['geometry']).centroid.x, shape(n['geometry']).centroid.y]
 
         avg = {}
         for name in Coordinates:

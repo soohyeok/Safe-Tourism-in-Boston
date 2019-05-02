@@ -20,7 +20,7 @@ class get_neighborhoods(dml.Algorithm):
         repo = client.repo
         repo.authenticate('soohyeok_soojee', 'soohyeok_soojee')
 
-        url = 'http://bostonopendata-boston.opendata.arcgis.com/datasets/3525b0ee6e6b427f9aab5d0a1d0a1a28_0.geojson'
+        url = 'http://bostonopendata-boston.opendata.arcgis.com/datasets/7dc47e49e35b41f3be9e2e0bdd4940f1_4.geojson' # district
         response = urllib.request.urlopen(url).read().decode("utf-8")
         r = json.loads(response)
         s = json.dumps(r, sort_keys=True, indent=2)
@@ -29,7 +29,6 @@ class get_neighborhoods(dml.Algorithm):
         repo['soohyeok_soojee.get_neighborhoods'].insert_many(r['features'])
         repo['soohyeok_soojee.get_neighborhoods'].metadata({'complete':True})
         print(repo['soohyeok_soojee.get_neighborhoods'].metadata())
-
         repo.logout()
 
         endTime = datetime.datetime.now()
@@ -52,10 +51,10 @@ class get_neighborhoods(dml.Algorithm):
         doc.add_namespace('dat', 'http://datamechanics.io/data/') # The data sets are in <user>#<collection> format.
         doc.add_namespace('ont', 'http://datamechanics.io/ontology#') # 'Extension', 'DataResource', 'DataSet', 'Retrieval', 'Query', or 'Computation'.
         doc.add_namespace('log', 'http://datamechanics.io/log/') # The event log.
-        doc.add_namespace('bod', 'http://bostonopendata-boston.opendata.arcgis.com/datasets/')
+        doc.add_namespace('bod', 'https://opendata.arcgis.com/datasets/')  # district
 
         this_script = doc.agent('alg:soohyeok_soojee#get_neighborhoods', {prov.model.PROV_TYPE:prov.model.PROV['SoftwareAgent'], 'ont:Extension':'py'})
-        resource = doc.entity('bod:neighborhoods', {'prov:label':'Boston Neighborhoods', prov.model.PROV_TYPE:'ont:DataResource', 'ont:Extension':'geojson'})
+        resource = doc.entity('bod:neighborhoods', {'prov:label':'City Council Districts', prov.model.PROV_TYPE:'ont:DataResource', 'ont:Extension':'geojson'})
         get_nighbors = doc.activity('log:uuid'+str(uuid.uuid4()), startTime, endTime)
         doc.wasAssociatedWith(get_nighbors, this_script)
         doc.usage(get_nighbors, resource, startTime, None,
@@ -75,10 +74,10 @@ class get_neighborhoods(dml.Algorithm):
 
 # This is example code you might use for debugging this module.
 # Please remove all top-level function calls before submitting.
-get_neighborhoods.execute()
-doc = get_neighborhoods.provenance()
-print(doc.get_provn())
-print(json.dumps(json.loads(doc.serialize()), indent=4))
+# get_neighborhoods.execute()
+# doc = get_neighborhoods.provenance()
+# print(doc.get_provn())
+# print(json.dumps(json.loads(doc.serialize()), indent=4))
 
 
 ## eof

@@ -6,6 +6,7 @@ import datetime
 import uuid
 from shapely.geometry import Point, MultiPolygon, shape
 import numpy as np
+import scipy.stats
 
 class stat_landmark_crime(dml.Algorithm):
     contributor = 'soohyeok_soojee'
@@ -23,7 +24,7 @@ class stat_landmark_crime(dml.Algorithm):
         repo.authenticate('soohyeok_soojee', 'soohyeok_soojee')
 
         neighborhoodData = repo['soohyeok_soojee.get_neighborhoods'].find()
-        Coordinates = repo['soohyeok_soojee.kmeans_landmark_transportation_crime'].find()[0]['Coordinates']
+        Coordinates = repo['soohyeok_soojee.kmeans_landmark_crime'].find()[0]['Coordinates']
 
         def average(x):
             return sum(x)/len(x)
@@ -35,8 +36,8 @@ class stat_landmark_crime(dml.Algorithm):
 
         neighborhoods = {}
         for n in neighborhoodData:
-            key = n['properties']['Name']
-            neighborhoods[key] = [shape(n['geometry']).centroid.x, shape(n['geometry']).centroid.y]
+            key = n['properties']['DISTRICT']
+            neighborhoods[str(key)] = [shape(n['geometry']).centroid.x, shape(n['geometry']).centroid.y]
 
         avg = {}
         for name in Coordinates:
@@ -54,9 +55,7 @@ class stat_landmark_crime(dml.Algorithm):
         print(repo['soohyeok_soojee.stat_landmark_crime'].metadata())
 
         repo.logout()
-
         endTime = datetime.datetime.now()
-
         return {"start":startTime, "end":endTime}
 
     @staticmethod

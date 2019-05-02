@@ -22,7 +22,7 @@ class transform_crime(dml.Algorithm):
         repo.authenticate('soohyeok_soojee', 'soohyeok_soojee')
 
         neighborhoodData = repo['soohyeok_soojee.get_neighborhoods'].find()
-        crimeData = repo['soohyeok_soojee.get_crimeData'].find().limit(2000)
+        crimeData = repo['soohyeok_soojee.get_crimeData'].find().limit(1800)
         if trial:
             crimeData = repo['soohyeok_soojee.get_crimeData'].find().limit(150)
 
@@ -30,9 +30,9 @@ class transform_crime(dml.Algorithm):
         neighborhoods = {}
         CrimeAndTown = {}
         for n in neighborhoodData:
-            key = n['properties']['Name']
-            neighborhoods[key] = n['geometry']
-            CrimeAndTown[key] = []
+            key = n['properties']['DISTRICT']
+            neighborhoods[str(key)] = n['geometry']
+            CrimeAndTown[str(key)] = []
 
         CrimeLocations = []
         for c in crimeData:
@@ -47,7 +47,6 @@ class transform_crime(dml.Algorithm):
                 if Point(point).within(shape(neighborhoods[name])):
                     CrimeAndTown[name] += [point]
 
-
         result = {'coordinates': CrimeLocations, 'CrimeAndTown': CrimeAndTown}
 
         repo.dropCollection("transform_crime")
@@ -57,9 +56,7 @@ class transform_crime(dml.Algorithm):
         print(repo['soohyeok_soojee.transform_crime'].metadata())
 
         repo.logout()
-
         endTime = datetime.datetime.now()
-
         return {"start":startTime, "end":endTime}
 
     @staticmethod

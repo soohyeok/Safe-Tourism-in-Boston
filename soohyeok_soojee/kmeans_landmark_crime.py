@@ -25,14 +25,13 @@ class kmeans_landmark_crime(dml.Algorithm):
         repo.authenticate('soohyeok_soojee', 'soohyeok_soojee')
 
         neighborhoodData = repo['soohyeok_soojee.get_neighborhoods'].find()
-        # AllCoordOfLandmark = repo['soohyeok_soojee.transform_landmark'].find()[0]['coordinates']
         LandmarkAndTown = repo['soohyeok_soojee.transform_landmark'].find()[0]['LandmarkAndTown']
         CrimeAndTown = repo['soohyeok_soojee.transform_crime'].find()[0]['CrimeAndTown']
 
         neighborhoods = {}
         for n in neighborhoodData:
-            key = n['properties']['Name']
-            neighborhoods[key] = n['geometry']
+            key = n['properties']['DISTRICT']
+            neighborhoods[str(key)] = n['geometry']
 
         def distance(a,b):
             (x1,y1) = a
@@ -48,8 +47,9 @@ class kmeans_landmark_crime(dml.Algorithm):
                     LandmarkAndTown[name].remove(p)
 
         data = [point for name in LandmarkAndTown for point in LandmarkAndTown[name]]
+
         # kmean plot
-        kmeans = KMeans(n_clusters=10).fit(data)
+        kmeans = KMeans(n_clusters=5).fit(data)
         data = np.array(data)
         # pyplot.scatter(data[:,0], data[:,1], c=kmeans.labels_)
         # pyplot.scatter(kmeans.cluster_centers_[:,0], kmeans.cluster_centers_[:,1], marker='x', c='red')
@@ -59,7 +59,6 @@ class kmeans_landmark_crime(dml.Algorithm):
         towns = [name for name in neighborhoods for point in centroid if Point(point).within(shape(neighborhoods[name]))]
         result = {'centroid': centroid, 'towns':towns, 'Coordinates':LandmarkAndTown}
 
-
         repo.dropCollection("kmeans_landmark_crime")
         repo.createCollection("kmeans_landmark_crime")
         repo['soohyeok_soojee.kmeans_landmark_crime'].insert_many([result])
@@ -67,9 +66,7 @@ class kmeans_landmark_crime(dml.Algorithm):
         print(repo['soohyeok_soojee.kmeans_landmark_crime'].metadata())
 
         repo.logout()
-
         endTime = datetime.datetime.now()
-
         return {"start":startTime, "end":endTime}
 
     @staticmethod

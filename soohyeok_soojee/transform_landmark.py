@@ -30,9 +30,9 @@ class transform_landmark(dml.Algorithm):
         neighborhoods = {}
         LandmarkAndTown = {}
         for n in neighborhoodData:
-            key = n['properties']['Name']
-            neighborhoods[key] = n['geometry']
-            LandmarkAndTown[key] = []
+            key = n['properties']['DISTRICT']
+            neighborhoods[str(key)] = n['geometry']
+            LandmarkAndTown[str(key)] = []
 
         coordinates = [shape(l['geometry']) for l in landmarkData]
         LandmarkLocations = [[point.centroid.x, point.centroid.y] for point in coordinates]
@@ -51,9 +51,7 @@ class transform_landmark(dml.Algorithm):
         print(repo['soohyeok_soojee.transform_landmark'].metadata())
 
         repo.logout()
-
         endTime = datetime.datetime.now()
-
         return {"start":startTime, "end":endTime}
 
     @staticmethod

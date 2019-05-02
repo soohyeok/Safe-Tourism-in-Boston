@@ -35,8 +35,8 @@ class stat_landmark(dml.Algorithm):
 
         neighborhoods = {}
         for n in neighborhoodData:
-            key = n['properties']['Name']
-            neighborhoods[key] = [shape(n['geometry']).centroid.x, shape(n['geometry']).centroid.y]
+            key = n['properties']['DISTRICT']
+            neighborhoods[str(key)] = [shape(n['geometry']).centroid.x, shape(n['geometry']).centroid.y]
 
         avg = {}
         for name in Coordinates:
@@ -45,6 +45,7 @@ class stat_landmark(dml.Algorithm):
             if Coordinates[name] != []:
                 dist = [distance(center, p) for p in points]
                 avg[name] = average(dist)
+
         result = [avg]
 
         repo.dropCollection("stat_landmark")
@@ -54,9 +55,7 @@ class stat_landmark(dml.Algorithm):
         print(repo['soohyeok_soojee.stat_landmark'].metadata())
 
         repo.logout()
-
         endTime = datetime.datetime.now()
-
         return {"start":startTime, "end":endTime}
 
     @staticmethod

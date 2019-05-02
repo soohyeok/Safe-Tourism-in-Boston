@@ -32,9 +32,9 @@ class transform_transportation(dml.Algorithm):
         neighborhoods = {}
         TransportationAndTown = {}
         for n in neighborhoodData:
-            key = n['properties']['Name']
-            neighborhoods[key] = n['geometry']
-            TransportationAndTown[key] = []
+            key = n['properties']['DISTRICT']
+            TransportationAndTown[str(key)] = []
+            neighborhoods[str(key)] = n['geometry']
 
         train = [shape(t['geometry']) for t in trainStationsData]
         bus = [shape(b['geometry']) for b in busStopsData]

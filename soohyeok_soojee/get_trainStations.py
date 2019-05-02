@@ -29,8 +29,7 @@ class get_trainStations(dml.Algorithm):
         repo['soohyeok_soojee.get_trainStations'].insert_many(r['features'])
         repo['soohyeok_soojee.get_trainStations'].metadata({'complete':True})
         print(repo['soohyeok_soojee.get_trainStations'].metadata())
-        a = repo['soohyeok_soojee.get_trainStations'].find()
-        
+
         repo.logout()
 
         endTime = datetime.datetime.now()
@@ -76,10 +75,10 @@ class get_trainStations(dml.Algorithm):
 
 # This is example code you might use for debugging this module.
 # Please remove all top-level function calls before submitting.
-get_trainStations.execute()
-doc = get_trainStations.provenance()
-print(doc.get_provn())
-print(json.dumps(json.loads(doc.serialize()), indent=4))
+# get_trainStations.execute()
+# doc = get_trainStations.provenance()
+# print(doc.get_provn())
+# print(json.dumps(json.loads(doc.serialize()), indent=4))
 
 
 ## eof

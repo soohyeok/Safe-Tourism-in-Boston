@@ -31,21 +31,20 @@ class kmeans_landmark_transportation(dml.Algorithm):
         neighborhoods = {}
         merge = {}
         for n in neighborhoodData:
-            key = n['properties']['Name']
-            neighborhoods[key] = n['geometry']
-            merge[key] = []
+            key = n['properties']['DISTRICT']
+            neighborhoods[str(key)] = n['geometry']
+            merge[str(key)] = []
 
         data = []
         for name in neighborhoods:
             data += LandmarkAndTown[name] + TransportationAndTown[name]
             merge[name] = LandmarkAndTown[name]+TransportationAndTown[name]
 
-        kmeans = KMeans(n_clusters=10).fit(data)
+        kmeans = KMeans(n_clusters=5).fit(data)
         data = np.array(data)
         # pyplot.scatter(data[:,0], data[:,1], c=kmeans.labels_)
         # pyplot.scatter(kmeans.cluster_centers_[:,0], kmeans.cluster_centers_[:,1], marker='x', c='red')
         # pyplot.show()
-
 
         centroid = [[x[0],x[1]] for x in kmeans.cluster_centers_]
         towns = [name for name in neighborhoods for point in centroid if Point(point).within(shape(neighborhoods[name]))]
@@ -58,9 +57,7 @@ class kmeans_landmark_transportation(dml.Algorithm):
         print(repo['soohyeok_soojee.kmeans_landmark_transportation'].metadata())
 
         repo.logout()
-
         endTime = datetime.datetime.now()
-
         return {"start":startTime, "end":endTime}
 
     @staticmethod

@@ -4,7 +4,6 @@ import dml
 import prov.model
 import datetime
 import uuid
-import ssl
 
 class get_landmarks(dml.Algorithm):
     contributor = 'soohyeok_soojee'
@@ -22,8 +21,7 @@ class get_landmarks(dml.Algorithm):
         repo.authenticate('soohyeok_soojee', 'soohyeok_soojee')
 
         url = 'http://bostonopendata-boston.opendata.arcgis.com/datasets/2c00111621954fa08ff44283364bba70_0.geojson'
-        context = ssl._create_unverified_context()
-        response = urllib.request.urlopen(url, context=context).read().decode("utf-8")
+        response = urllib.request.urlopen(url).read().decode("utf-8")
         r = json.loads(response)
         s = json.dumps(r, sort_keys=True, indent=2)
         repo.dropCollection("get_landmarks")
@@ -77,10 +75,10 @@ class get_landmarks(dml.Algorithm):
 
 # This is example code you might use for debugging this module.
 # Please remove all top-level function calls before submitting.
-get_landmarks.execute()
-doc = get_landmarks.provenance()
-print(doc.get_provn())
-print(json.dumps(json.loads(doc.serialize()), indent=4))
+# get_landmarks.execute()
+# doc = get_landmarks.provenance()
+# print(doc.get_provn())
+# print(json.dumps(json.loads(doc.serialize()), indent=4))
 
 
 ## eof

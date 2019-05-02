@@ -26,16 +26,15 @@ class kmeans_landmark(dml.Algorithm):
 
         neighborhoodData = repo['soohyeok_soojee.get_neighborhoods'].find()
         LandmarkAndTown = repo['soohyeok_soojee.transform_landmark'].find()[0]['LandmarkAndTown']
-
         neighborhoods = {}
         for n in neighborhoodData:
-            key = n['properties']['Name']
-            neighborhoods[key] = n['geometry']
+            key = n['properties']['DISTRICT']
+            neighborhoods[str(key)] = n['geometry']
 
         data = [point for name in LandmarkAndTown for point in LandmarkAndTown[name]]
 
         # kmean plot
-        kmeans = KMeans(n_clusters=10).fit(data)
+        kmeans = KMeans(n_clusters=5).fit(data)
         data = np.array(data)
         # pyplot.scatter(data[:,0], data[:,1], c=kmeans.labels_)
         # pyplot.scatter(kmeans.cluster_centers_[:,0], kmeans.cluster_centers_[:,1], marker='x', c='red')
@@ -52,9 +51,7 @@ class kmeans_landmark(dml.Algorithm):
         print(repo['soohyeok_soojee.kmeans_landmark'].metadata())
 
         repo.logout()
-
         endTime = datetime.datetime.now()
-
         return {"start":startTime, "end":endTime}
 
     @staticmethod

@@ -32,9 +32,9 @@ class kmeans_landmark_transportation_crime(dml.Algorithm):
         neighborhoods = {}
         merge = {}
         for n in neighborhoodData:
-            key = n['properties']['Name']
-            neighborhoods[key] = n['geometry']
-            merge[key] = []
+            key = n['properties']['DISTRICT']
+            neighborhoods[str(key)] = n['geometry']
+            merge[str(key)] = []
 
         for name in neighborhoods:
             merge[name] = LandmarkAndTown[name] + TransportationAndTown[name]
@@ -54,7 +54,7 @@ class kmeans_landmark_transportation_crime(dml.Algorithm):
 
         data = [point for name in merge for point in merge[name]]
 
-        kmeans = KMeans(n_clusters=10).fit(data)
+        kmeans = KMeans(n_clusters=5).fit(data)
         data = np.array(data)
         # pyplot.scatter(data[:,0], data[:,1], c=kmeans.labels_)
         # pyplot.scatter(kmeans.cluster_centers_[:,0], kmeans.cluster_centers_[:,1], marker='x', c='red')
@@ -63,18 +63,6 @@ class kmeans_landmark_transportation_crime(dml.Algorithm):
         centroid = [[x[0],x[1]] for x in kmeans.cluster_centers_]
         towns = [name for name in neighborhoods for point in centroid if Point(point).within(shape(neighborhoods[name]))]
         result = {'centroid': centroid, 'towns':towns, 'Coordinates':merge}
-
-
-        ### crime kmean
-        # Y = []
-        # for x in crimes.values():
-        #     Y += x
-        # kmeans2 = KMeans(n_clusters=10).fit(Y)
-        # Y = np.array(Y)
-        # pyplot.scatter(Y[:,0], Y[:,1], c=kmeans2.labels_)
-        # pyplot.scatter(kmeans2.cluster_centers_[:,0], kmeans2.cluster_centers_[:,1], marker='x', c='red')
-        # pyplot.show()
-
 
         repo.dropCollection("kmeans_landmark_transportation_crime")
         repo.createCollection("kmeans_landmark_transportation_crime")
