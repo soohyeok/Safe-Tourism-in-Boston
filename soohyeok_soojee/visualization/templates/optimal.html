@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width" />
+      <title> Proper Boston Tour </title>
+      <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA==" crossorigin=""/>
+      <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js" integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg==" crossorigin=""></script>
+      <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <style>
+          body,h1 {font-family: "Raleway", Arial, sans-serif}
+          h1 {letter-spacing: 6px}.w3-row-padding img {margin-bottom: 12px}
+          #map{ width: 1000px; height: 700px; margin-bottom: 20px;}
+          form {margin-bottom: 5px; letter-spacing: 3px}
+      </style>
+  </head>
+
+  <body>
+      <!-- !PAGE CONTENT! -->
+      <div class="w3-content" >
+          <!-- Header -->
+          <header class="w3-panel w3-center w3-opacity" style="padding:20px 15px">
+              <h1>Proper Boston Tour</h1>
+              <div class="w3-padding-30">
+                  <div class="w3-bar w3-border">
+                      <a href="/" class="w3-bar-item w3-button">Boston Map</a>
+                      <a href="/optimal" class="w3-bar-item w3-button w3-hide-small">Optimal Areas</a>
+                  </div>
+              </div>
+          </header>
+
+          {% if msg %} {{msg}} {% endif %}
+
+          <!-- checkbox -->
+          <form method="post">
+              <label><input type="checkbox" name="land" value=true checked=true/>
+                  <span>Landmark</span>
+              </label>
+              <label><input type="checkbox" name="trans" value=true />
+                  <span>Transportation</span>
+              </label>
+              <label><input type="checkbox" name="crime" value=true />
+                  <span>Crime</span>
+              </label>
+              <label><input class="w3-button w3-padding-small w3-border" type="submit" name="submit" value="Submit"/></label>
+          </form>
+          <!-- end checkbos -->
+
+          <!-- leaflet map -->
+          <div id="map"></div>
+          <script>
+              var map = L.map('map').setView([42.320639, -71.091533], 12);
+              L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+                  attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+                  maxZoom: 18,
+                  id: 'mapbox.streets',
+                  accessToken: 'pk.eyJ1Ijoia3N1emllIiwiYSI6ImNqdjRtbXBsMjB5eGEzeWw4aTYxNGtpdWcifQ.T5A6DDkvZB1nf0VxYcpaxg'
+              }).addTo(map);
+              map.createPane('districtPane');
+              map.createPane("kmeanPane");
+
+              function fetchJSON(url) {
+                return fetch(url)
+                  .then(function(response) {
+                    return response.json();
+                  });
+              }
+
+              var districtFile = "https://opendata.arcgis.com/datasets/7dc47e49e35b41f3be9e2e0bdd4940f1_4.geojson"
+              var district = fetchJSON(districtFile)
+              var landmarks = {{landmarks}};
+              var transportations = {{transportations}}
+              var crimes = {{crimes}}
+              var kmeans = {{kmeans}}
+
+              function find(districtNum, data){
+                for(var i=0; i<9; i++){
+                  if (districtNum == data[i][0]){
+                    return data[i][1];}
+                }
+              }
+
+              fetch(district).then(res => res.json()).then(data => L.geoJSON(data).addTo(map))
+              district.then(data => L.geoJSON(data,
+                {pane: "districtPane", onEachFeature: function onEachFeature(feature, layer) {
+                    layer.bindPopup("<b>District: " + feature.properties.DISTRICT + "</b>" +
+                                    "<br>Landmarks: " + find(feature.properties.DISTRICT, landmarks) +
+                                    "<br>Transportations: " + find(feature.properties.DISTRICT, transportations) +
+                                    "<br>Crime reports: " + find(feature.properties.DISTRICT, crimes));}
+                }
+              ).addTo(map))
+
+              for (var i = 0; i < kmeans.length; i++) {
+                L.circle([kmeans[i][1],kmeans[i][0]], {
+                  color: '#DEA5A4',
+                  fillColor: '#FF6961',
+                  fillOpacity: 0.5,
+                  radius: 700
+                }).addTo(map);
+              }
+
+          </script>
+      <!-- End Page Content -->
+      </div>
+  </body>
+</html>
