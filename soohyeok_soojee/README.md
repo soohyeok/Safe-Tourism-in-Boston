@@ -92,6 +92,10 @@ After running the K-means algorithm, we were able to define hard clusters where 
 
 ### statistical analysis or inference algorithm:
 There are different variation for the stats considering whether the user cares for crime or transportation in addition to the scope of landmark coordinates.
+
+This map image provides key for the usuage of the webplatform and other datasets we have overlooked in this project.
+![](key_map.png)
+
 #### *stat_landmark.py*:
 - finds the averaging center point of landmarks based on each neighborhood's landmark coordinates
 - then finds the average distance to each landmark to the found coordinate
@@ -121,7 +125,7 @@ Our attempt was to create a rough estimate values to compare with the K-means va
 ### Project#3 Description:
 Now that we have validated our algorithms in Project#2 of the project, we were in attempt to create a web-base interactive platform for users to access this data. We have used a tool called MapBox (https://www.mapbox.com/) to map our transformed and calculated datasets on to a map.
 
-This image provides key for the usuage of the webplatform and other datasets we have overlooked in this project.
+This map image provides key for the usuage of the webplatform and other datasets we have overlooked in this project.
 ![](key_map.png)
 
 Executing Commands for User-Interactive Web-based Platform is provided in the *Readme.md* in the subdirectory named '*visualizations*'
