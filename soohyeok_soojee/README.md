@@ -141,6 +141,12 @@ The image above is the resulting case of OnMouseOver/OnClick Implementation on '
 The image above is the resulting case of OnMouseOver/OnClick Implementation on 'district 9'.
 
 #### OnSubmit Implementation
+OnSubmit Impletation of our web-based platform allows user to mark checkbox for landmark, transportation and crime datasets in their search. Upon checking a box, the algorithm intakes the marked datasets and pulls information from our K-mean variation from our Project#2 to provide the user with the search with requested set of data.
+![](submit_landmark.png)
+![](submit_landmark_crime.png)
+![](submit_landmark_trans.png)
+![](submit_landmark_trans_crime.png)
+
 
 ## Conclusion
 
