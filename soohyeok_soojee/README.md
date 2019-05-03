@@ -3,7 +3,7 @@
 - Soojee Kim
 - Soohyeok Lee
 
-## Project Obejective:
+## Project Objective:
 Our goal is to determine best travel experiences for incoming tourists within Greater Boston Area. Having such an immense area, people may not have their best experiences in their limited time of travel and we wanted to suggest specific areas based on various datasets for the best possible experience.
 
 ## Project Description:
@@ -33,11 +33,13 @@ https://geo-massdot.opendata.arcgis.com/datasets/train-stations?geometry=-73.51%
 
 ## Methods and Results
 ### Transformation (Project#1):
-For Project one part of the project, we have simply pulled the datasets from the dataset APIs. 
+For Project one part of the project, we have simply pulled the datasets from the dataset APIs.
+Each of the filename used for the Project#1 is marked in italics and description for each file's utilization is provided below.
+
 #### *transform_landmark.py* (file name-changed and updated from *landmarkRate.py*):
 - Pulls dataset of polygons from *get_neighborhoods.py*
 - Pulls dataset of polygons from *get_landmarks.py*
-- Polygon datset of landmarks is averaged into points
+- Polygon dataset of landmarks is averaged into points
 - Now that we have points, checks where the crime points are marked within the neighborhood polygons.
 
 #### *transform_crime.py* (file name-changed and updated from *crimeRate.py*):
@@ -50,43 +52,46 @@ For Project one part of the project, we have simply pulled the datasets from the
 - Pulls dataset of points from *get_trainStations.py*
 - Pulls dataset of points from *get_busStops.py*
 - Merges two dataset of points of bus and train
-- Checks where the bus stops and trainstations are within which polygons of neighborhoods.
+- Checks where the bus stops and train stations are within which polygons of neighborhoods.
 
 
-## *Project#2 justification*
-We needed a way to rate the neighborhoods somehow based on the coordinate datas we have collected. The problem is that we have each neighborhood's landmark coordinates, public tranportation coordiantes and crime coordiantes (where crime occured) but we do not have a way to compare a neighborhood to another neighborhood.
+## *Project#2 Description*
+We needed a way to rate the neighborhoods somehow based on the coordinate data we have collected. The problem is that we have each neighborhood's landmark coordinates, public transportation coordinates and crime coordinates (where crime occurred) but we do not have a way to compare a neighborhood to another neighborhood.
 
-We decided to use K-means to find cluster of coordinates with positive values (landmark coordinates and public transporation coordinates). The K-means would give us a K number of coordiantes where the data is clustered at. This would not let us compare the neighborhoods but based on where each coordinate lies, we may be able to take this information to rate the neighborhoods. We could possibly decide to give the coordinates to the center of the clusters found by the K-mean algorithm for the users to possibly create a better experience.
+We decided to use K-means to find cluster of coordinates with positive values (landmark coordinates and public transportation coordinates). The K-means would give us a K number of coordinates where the data is clustered at. This would not let us compare the neighborhoods but based on where each coordinate lies, we may be able to take this information to rate the neighborhoods. We could possibly decide to give the coordinates to the center of the clusters found by the K-mean algorithm for the users to possibly create a better experience.
 
-Then we found the average distance of all features of a neighborhood from its averaged coordinate of its features (if the wording here is confusing, I have described what each file does below; please scroll down to where file name includes *stat*). I would call this algorithm to be somewhat of an scuffed insight to K-means. Based on the resulting averaged distances to averaged coordinates of neighborhood's features, we are able to rank the neighborhoods in a manner (I will refer to the averaged distance value as stats value). The stats value would tell us which town would be better to travel to based on how clustered the features are in each town. Basically lower value means landmarks and transportations are packed tightly together within the neighborhood. This is not comparable directly to the K-means but the stats algorithm gives us a different insight within each town's data of coordinates.
+Then we found the average distance of all features of a neighborhood from its averaged coordinate of its features (if the wording here is confusing, I have described what each file does below; please scroll down to where file name includes *stat*). I would call this algorithm to be somewhat of an scuffed insight to K-means. Based on the resulting averaged distances to averaged coordinates of neighborhood's features, we are able to rank the neighborhoods in a manner (I will refer to the averaged distance value as stats value). The stats value would tell us which town would be better to travel to, based on how clustered the features are in each town. Basically, lower value means landmarks and transportations are packed tightly together within the neighborhood. This is not comparable directly to the K-means but the stats algorithm gives us a different insight within each town's data of coordinates.
 
-Also, we created different variations for the K-means and stats algorithm for user experience in that
-- transportation coordinates are included or excluded: considering user may use public transportation or just simply ride uber(or drive their own car)
+Also, we created different variations for the K-mean method and stats algorithm for user experience in that
+- transportation coordinates are included or excluded: considering user may use public transportation or just simply ride UBER(or drive their own car)
 - crime coordinates are included or excluded: considering safety may not be a issue to the user
 
 ### non-trivial constraint satisfaction or optimization technique:
-- There are different variation for the k-means for the different visualization we are preparing for project#3
-#### *k-means_landmark.py*:
+- There are different variation for the k-means considering whether the user cares for crime or transportation in addition to the scope of landmark coordinates.
+#### *k-means_landmark.py* (with landmark data):
 - K-means algorithm for finding clusters of landmarks
 - locates K coordinates that are centers of the found clusters 
 ![](kmeans_landmark.png)
-#### *k-means_landmark_crime.py*:
+#### *k-means_landmark_crime.py* (with landmark data and crime data):
 - K-means algorithm for finding clusters of landmarks
 - landmark coordinates close to crime coordinates are removed
 - locates K coordinates that are centers of the found clusters
 ![](kmeans_landmark_crime.png)
-#### *k-means_landmark_transportation.py*:
+#### *k-means_landmark_transportation.py* (with landmark data and transportation data):
 - K-means algorithm for finding clusters of landmarks and transporations (bus & train)
 - locates K coordinates that are centers of the found clusters
 ![](kmeans_landmark_transportation.png)
-#### *k-means_landmark_transportation_crime.py*:
+#### *k-means_landmark_transportation_crime.py* (with landmark data, crime data and transportation data.:
 - K-means algorithm for finding clusters of landmarks and trasnportations (bus & train) where
 - landmark or transporation coordinates close to crime coordinates are removed 
 - locates K coordinates that are centers of the found clusters 
 ![](kmeans_landmark_transportation_crime.png)
 
+### K-means Analysis
+After running the K-means algorithm, we were able to define hard clusters where the coordinates are clustered. We have tested with various value of K to see if results differ and concluded with the result we see above. This result is useful in that we are able to guide the tourists to best possible locations to travel to, which are marked with 'X' in red color on the images above. The 'X' marks are where the K-means algorithm has clustered the coordinates to, thus there will be highest number of landmarks to visit and transportation to utilize around these marked coordinates. 
+
 ### statistical analysis or inference algorithm:
-- There are different variation for the stats alg for the different visualization we are preparing for project#3
+- There are different variation for the stats considering whether the user cares for crime or transportation in addition to the scope of landmark coordinates.
 #### *stat_landmark.py*:
 - finds the averaging center point of landmarks based on each neighborhood's landmark coordinates
 - then finds the average distance to each landmark to the found coordinate
@@ -101,6 +106,17 @@ Also, we created different variations for the K-means and stats algorithm for us
 - landmark coordinates near crime coordinates are removed
 - finds the averaging center point of landmarks and transportations based on each neighborhood's landmark coordinates and transportation coordinates
 - then finds the average distance to each landmarks and transporations to the found coordinates
+
+### Statistics Analysis:
+Our attempt was to create a rough estimate values to compare with the K-means value. The error in this step of our project is that we have rather created another set of values rather than comparing the K-means values directly, where we have received deduction in grading for Project#2 of the assignment for not providing valid statistics (it was noted that a simple average is not considered to be statistics). However, our objective here was to validate K-means algorithm by checking the results from the K-means to our manually calculated statistics. The result was successful, where we were able to validate the cluster coordinates provided by K-means are the best locations for the tourists to travel to, based on our scope of datasets.
+
+### Project#3 Description:
+Now that we have validated our algorithms in Project#2 of the project, we were in attempt to create a web-base interactive platform for users to access this data. We have used a tool called MapBox (https://www.mapbox.com/) to map our transformed and calculated datasets on to a map.
+
+This image provides key for the usuage of the webplatform and other datasets we have overlooked in this project.
+![](key_map.png)
+
+Executing Commands for User-Interactive Web-based Platform is provided in the *Readme.md* in the subdirectory named '*visualizations*'
 
 ## Conclusion
 
