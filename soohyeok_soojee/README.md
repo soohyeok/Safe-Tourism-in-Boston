@@ -95,17 +95,21 @@ After running the K-means algorithm, we were able to define hard clusters where 
 #### *stat_landmark.py*:
 - finds the averaging center point of landmarks based on each neighborhood's landmark coordinates
 - then finds the average distance to each landmark to the found coordinate
+![](stat_landmark.png)
 #### *stat_landmark_crime.py*:
 - landmark coordinates near crime coordinates are removed
 - finds the averaging center point of landmarks based on each neighborhood's landmark coordinates
 - then finds the average distance to each landmark to the found coordinate
+![](stat_landmark_crime.png)
 #### *stat_landmark_transportation.py*:
 - finds the averaging center point of landmarks and transportations based on each neighborhood's landmark coordinates and transportation coordinates
 - then finds the average distance to each landmarks and transporations to the found coordinates
+![](stat_landmark_trans.png)
 #### *stat_landmark_transportation_crime.py*:
 - landmark coordinates near crime coordinates are removed
 - finds the averaging center point of landmarks and transportations based on each neighborhood's landmark coordinates and transportation coordinates
 - then finds the average distance to each landmarks and transporations to the found coordinates
+![](stat_landmark_trans_crime.png)
 
 ### Statistics Analysis:
 Our attempt was to create a rough estimate values to compare with the K-means value. The error in this step of our project is that we have rather created another set of values rather than comparing the K-means values directly, where we have received deduction in grading for Project#2 of the assignment for not providing valid statistics (it was noted that a simple average is not considered to be statistics). However, our objective here was to validate K-means algorithm by checking the results from the K-means to our manually calculated statistics. The result was successful, where we were able to validate the cluster coordinates provided by K-means are the best locations for the tourists to travel to, based on our scope of datasets.
