@@ -93,7 +93,7 @@ After running the K-means algorithm, we were able to define hard clusters where 
 ### statistical analysis or inference algorithm:
 There are different variations for the statistics considering whether the user cares for crime or transportation in addition to the scope of landmark coordinates.
 
-This map image provides key for the usuage of the webplatform and other datasets we have overlooked in this project.
+*This map image provides key for the usuage of the webplatform and other datasets we have overlooked in this project.*
 ![](key_map.png)
 
 #### *stat_landmark.py*:
@@ -124,11 +124,17 @@ Our attempt was to create a rough estimate values to compare with the K-means va
 
 ### Project#3 Description:
 Now that we have validated our algorithms in Project#2 of the project, we were in attempt to create a web-base interactive platform for users to access this data. We have used a tool called MapBox (https://www.mapbox.com/) to map our transformed and calculated datasets on to a map.
-
-This map image provides key for the usuage of the webplatform and other datasets we have overlooked in this project.
-![](key_map.png)
-
+When executed, the web-based platform looks like this:
+![](web.png)
 Executing Commands for User-Interactive Web-based Platform is provided in the *Readme.md* in the subdirectory named '*visualizations*'
+Two implementations we have made using MapBox has two functionalities of OnMouseOver and OnSubmit.
+
+#### OnMouseOver
+On click or on mouse over, we provide counted dataset from Project#1 of our Project where the user could access the total number of landmark coordinates, transportation coordinates and crime coordinates.
+![](over3.png)
+![](over5.png)
+![](over7.png)
+![](over9.png)
 
 ## Conclusion
 
