@@ -132,21 +132,24 @@ Two implementations we have made using MapBox has two functionalities of OnMouse
 #### OnMouseOver/OnClick Implementation
 On click or on mouse over, we provide counted dataset from Project#1 of our Project where the user could access the total number of landmark coordinates, transportation coordinates and crime coordinates.
 ![](over3.png)
-The image above is the resulting case of OnMouseOver/OnClick Implementation on 'district 3'.
+*The image above is the resulting case of OnMouseOver/OnClick Implementation on 'district 3'.*
 ![](over5.png)
-The image above is the resulting case of OnMouseOver/OnClick Implementation on 'district 5'.
+*The image above is the resulting case of OnMouseOver/OnClick Implementation on 'district 5'.*
 ![](over7.png)
-The image above is the resulting case of OnMouseOver/OnClick Implementation on 'district 7'.
+*The image above is the resulting case of OnMouseOver/OnClick Implementation on 'district 7'.*
 ![](over9.png)
-The image above is the resulting case of OnMouseOver/OnClick Implementation on 'district 9'.
+*The image above is the resulting case of OnMouseOver/OnClick Implementation on 'district 9'.*
 
 #### OnSubmit Implementation
 OnSubmit Impletation of our web-based platform allows user to mark checkbox for landmark, transportation and crime datasets in their search. Upon checking a box, the algorithm intakes the marked datasets and pulls information from our K-mean variation from our Project#2 to provide the user with the search with requested set of data.
 ![](submit_landmark.png)
+*The image above is the resulting case of OnSubmit Implementation with Datasets: Landmark.*
 ![](submit_landmark_crime.png)
+*The image above is the resulting case of OnSubmit Implementation with Datasets: Landmark and Crime.*
 ![](submit_landmark_trans.png)
+*The image above is the resulting case of OnSubmit Implementation with Datasets: Landmark and Transportations.*
 ![](submit_landmark_trans_crime.png)
-
+*The image above is the resulting case of OnSubmit Implementation with Datasets: Landmark, Transportations and Crime.*
 
 ## Conclusion
 
