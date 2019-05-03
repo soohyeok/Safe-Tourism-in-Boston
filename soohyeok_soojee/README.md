@@ -67,7 +67,7 @@ Also, we created different variations for the K-mean method and stats algorithm 
 - crime coordinates are included or excluded: considering safety may not be a issue to the user
 
 ### non-trivial constraint satisfaction or optimization technique:
-There are different variation for the k-means considering whether the user cares for crime or transportation in addition to the scope of landmark coordinates.
+There are different variations for the k-means considering whether the user cares for crime or transportation in addition to the scope of landmark coordinates.
 #### *k-means_landmark.py* (with landmark data):
 - K-means algorithm for finding clusters of landmarks
 - locates K coordinates that are centers of the found clusters 
@@ -78,12 +78,12 @@ There are different variation for the k-means considering whether the user cares
 - locates K coordinates that are centers of the found clusters
 ![](kmeans_landmark_crime.png)
 #### *k-means_landmark_transportation.py* (with landmark data and transportation data):
-- K-means algorithm for finding clusters of landmarks and transporations (bus & train)
+- K-means algorithm for finding clusters of landmarks and transportations (bus & train)
 - locates K coordinates that are centers of the found clusters
 ![](kmeans_landmark_transportation.png)
 #### *k-means_landmark_transportation_crime.py* (with landmark data, crime data and transportation data.:
-- K-means algorithm for finding clusters of landmarks and trasnportations (bus & train) where
-- landmark or transporation coordinates close to crime coordinates are removed 
+- K-means algorithm for finding clusters of landmarks and transportations (bus & train) where
+- landmark or transportation coordinates close to crime coordinates are removed 
 - locates K coordinates that are centers of the found clusters 
 ![](kmeans_landmark_transportation_crime.png)
 
@@ -91,7 +91,7 @@ There are different variation for the k-means considering whether the user cares
 After running the K-means algorithm, we were able to define hard clusters where the coordinates are clustered. We have tested with various value of K to see if results differ and concluded with the result we see above. This result is useful in that we are able to guide the tourists to best possible locations to travel to, which are marked with 'X' in red color on the images above. The 'X' marks are where the K-means algorithm has clustered the coordinates to, thus there will be highest number of landmarks to visit and transportation to utilize around these marked coordinates. 
 
 ### statistical analysis or inference algorithm:
-There are different variation for the stats considering whether the user cares for crime or transportation in addition to the scope of landmark coordinates.
+There are different variations for the statistics considering whether the user cares for crime or transportation in addition to the scope of landmark coordinates.
 
 This map image provides key for the usuage of the webplatform and other datasets we have overlooked in this project.
 ![](key_map.png)
@@ -109,13 +109,13 @@ This map image provides key for the usuage of the webplatform and other datasets
 ![](stat_lanmark_crime.png)
 #### *stat_landmark_transportation.py*:
 - finds the averaging center point of landmarks and transportations based on each neighborhood's landmark coordinates and transportation coordinates
-- then finds the average distance to each landmarks and transporations to the found coordinates
+- then finds the average distance to each landmark and transportation to the found coordinates
 
 ![](stat_landmark_trans.png)
 #### *stat_landmark_transportation_crime.py*:
 - landmark coordinates near crime coordinates are removed
 - finds the averaging center point of landmarks and transportations based on each neighborhood's landmark coordinates and transportation coordinates
-- then finds the average distance to each landmarks and transporations to the found coordinates
+- then finds the average distance to each landmark and transportation to the found coordinates
 
 ![](stat_landmark_trans_crime.png)
 
