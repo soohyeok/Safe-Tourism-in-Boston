@@ -32,7 +32,7 @@ https://geo-massdot.opendata.arcgis.com/datasets/2c00111621954fa08ff44283364bba7
 https://geo-massdot.opendata.arcgis.com/datasets/train-stations?geometry=-73.51%2C41.878%2C-69.555%2C42.59
 
 ## Methods and Results
-### Transformation (Project#1):
+### Transformation (*Project#1*):
 For Project one part of the project, we have simply pulled the datasets from the dataset APIs.
 Each of the filename used for the Project#1 is marked in italics and description for each file's utilization is provided below.
 
@@ -55,7 +55,7 @@ Each of the filename used for the Project#1 is marked in italics and description
 - Checks where the bus stops and train stations are within which polygons of neighborhoods.
 
 
-## *Project#2 Description*
+### Optimization & Statistics (*Project#2*)
 We needed a way to rate the neighborhoods somehow based on the coordinate data we have collected. The problem is that we have each neighborhood's landmark coordinates, public transportation coordinates and crime coordinates (where crime occurred) but we do not have a way to compare a neighborhood to another neighborhood.
 
 We decided to use K-means to find cluster of coordinates with positive values (landmark coordinates and public transportation coordinates). The K-means would give us a K number of coordinates where the data is clustered at. This would not let us compare the neighborhoods but based on where each coordinate lies, we may be able to take this information to rate the neighborhoods. We could possibly decide to give the coordinates to the center of the clusters found by the K-mean algorithm for the users to possibly create a better experience.
@@ -122,7 +122,7 @@ There are different variations for the statistics considering whether the user c
 ### Statistics Analysis:
 Our attempt was to create a rough estimate values to compare with the K-means value. The error in this step of our project is that we have rather created another set of values rather than comparing the K-means values directly, where we have received deduction in grading for Project#2 of the assignment for not providing valid statistics (it was noted that a simple average is not considered to be statistics). However, our objective here was to validate K-means algorithm by checking the results from the K-means to our manually calculated statistics. The result was successful, where we were able to validate the cluster coordinates provided by K-means are the best locations for the tourists to travel to, based on our scope of datasets.
 
-### Project#3 Description:
+### Interactive Web-based Platform (*Project#3*):
 Now that we have validated our algorithms in Project#2 of the project, we were in attempt to create a web-base interactive platform for users to access this data. We have used a tool called MapBox (https://www.mapbox.com/) to map our transformed and calculated datasets on to a map.
 When executed, the web-based platform looks like this:
 ![](web.png)
