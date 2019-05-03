@@ -129,12 +129,18 @@ When executed, the web-based platform looks like this:
 Executing Commands for User-Interactive Web-based Platform is provided in the *Readme.md* in the subdirectory named '*visualizations*'
 Two implementations we have made using MapBox has two functionalities of OnMouseOver and OnSubmit.
 
-#### OnMouseOver
+#### OnMouseOver/OnClick Implementation
 On click or on mouse over, we provide counted dataset from Project#1 of our Project where the user could access the total number of landmark coordinates, transportation coordinates and crime coordinates.
 ![](over3.png)
+The image above is the resulting case of OnMouseOver/OnClick Implementation on 'district 3'.
 ![](over5.png)
+The image above is the resulting case of OnMouseOver/OnClick Implementation on 'district 5'.
 ![](over7.png)
+The image above is the resulting case of OnMouseOver/OnClick Implementation on 'district 7'.
 ![](over9.png)
+The image above is the resulting case of OnMouseOver/OnClick Implementation on 'district 9'.
+
+#### OnSubmit Implementation
 
 ## Conclusion
 
