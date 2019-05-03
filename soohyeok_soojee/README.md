@@ -102,7 +102,7 @@ There are different variation for the stats considering whether the user cares f
 - finds the averaging center point of landmarks based on each neighborhood's landmark coordinates
 - then finds the average distance to each landmark to the found coordinate
 
-![](stat_landmark_crime.png)
+![](stat_lanmark_crime.png)
 #### *stat_landmark_transportation.py*:
 - finds the averaging center point of landmarks and transportations based on each neighborhood's landmark coordinates and transportation coordinates
 - then finds the average distance to each landmarks and transporations to the found coordinates
