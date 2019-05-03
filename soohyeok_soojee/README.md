@@ -152,9 +152,12 @@ OnSubmit Impletation of our web-based platform allows user to mark checkbox for 
 *The image above is the resulting case of OnSubmit Implementation with Datasets: Landmark, Transportations and Crime.*
 
 ## Conclusion
+Our algorithm is successful in determining best location to travel to, based on our K-means algorithm of finding clusters. However, if the datasets we have incorporated continue to update, we realize that growth of crime would be higher than growth of landmarks. One problem we have is the case where transportation data is not required (upon request of the user). There are not enough landmark coordinates to cover the crime coordinates as we see in *k-means_landmark_crime.py*. In our algorithm to balance the positive(tourists' interests: landmark, transportations) and negative(tourist's worries: crime), the algorithm takes off landmark and transportation coordinates (considered positive value to our algorithm) off our dataset based on crime coordinates(considered negative value to our algorithm). This successfully provides 'Safe Tourism in Boston'. However, in our expectations of the datasets in our near future, landmarks will be removed completely at one point. I think for our project to overcome these problems, there has to be more dataset of positive values incorporated to the project, which would be attractions like shopping districts, university grounds (since Universities are one interest of tourists), and perhaps top-rated restaurants.
 
-## Future Works
+Considering such perspectives, our project is useful in fulfilling our project objective, but results are arguable in that our incorporated datasets are limited. An user could definitely find one of the safest and convenient location to trouble in that the suggested location provided by the algorithm will have cluster of landmarks to observe (convenient travel) but in terms of safety, it varies on how many landmark the location's cluster has. For better analysis, future work is suggested on this project to incorporate more datasets that include other possible interests of tourists that we have not overlooked as we have mentioned above.
 
+### Further on Future Works
+Our Project translates our datasets and algorithm results over to a map using MapBox but it fails to lead a user directly to an address. For future works, I believe user interaction would be much more efficient if we were to incorporate Google Maps API to guide our user to a specific address.
 
 ## Execution Script for Provenance.html:
 To execute all the algorithms for the project in an order that respects their explicitly specified data flow dependencies, run the following from the root directory:
