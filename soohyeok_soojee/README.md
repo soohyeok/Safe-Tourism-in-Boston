@@ -1,11 +1,18 @@
 # CS504 Project: Proper Boston Tour Documentation
-## Contributors:
+### Contributors:
 - Soojee Kim
 - Soohyeok Lee
 
-
-### Project Goal:
+## Project Obejective:
 Our goal is to determine best travel experiences for incoming tourists within Greater Boston Area. Having such an immense area, people may not have their best experiences in their limited time of travel and we wanted to suggest specific areas based on various datasets for the best possible experience.
+
+## Project Description:
+We have put together the few datasets listed above and transformed the acquired datasets to see which neighborhoods within the Greater Boston Area based on which of the districts
+- has greater number of landmarks to see
+- has better system of public transportation
+- has low crime rates.
+
+Although we have different datasets of polygons and points, our current project model is heavily dependent on geolocation datasets. We are continuously overlooking on possible datasets to incorporate into our project to further develop user experience.
 
 ### Data sources Used:
 - Analyze Boston (*data.boston.gov*)
@@ -24,15 +31,7 @@ https://geo-massdot.opendata.arcgis.com/datasets/2c00111621954fa08ff44283364bba7
 5. MBTA Station stops (*get_trainStations.py*)  
 https://geo-massdot.opendata.arcgis.com/datasets/train-stations?geometry=-73.51%2C41.878%2C-69.555%2C42.59
 
-### Project Description:
-We have put together the few datasets listed above and transformed the acquired datasets to see which neighborhoods within the Greater Boston Area based on which of the districts
-- has greater number of landmarks to see
-- has better system of public transportation
-- has low crime rates.
-
-Although we have different datasets of polygons and points, our current project model is heavily dependent on geolocation datasets. We are continuously overlooking on possible datasets to incorporate into our project to further develop user experience.
-
-## Methods
+## Methods and Results
 ### Transformation (Project#1):
 For Project one part of the project, we have simply pulled the datasets from the dataset APIs. 
 #### *transform_landmark.py* (file name-changed and updated from *landmarkRate.py*):
@@ -103,13 +102,18 @@ Also, we created different variations for the K-means and stats algorithm for us
 - finds the averaging center point of landmarks and transportations based on each neighborhood's landmark coordinates and transportation coordinates
 - then finds the average distance to each landmarks and transporations to the found coordinates
 
-### Execution Script for Provenance.html:
+## Conclusion
+
+## Future Works
+
+
+## Execution Script for Provenance.html:
 To execute all the algorithms for the project in an order that respects their explicitly specified data flow dependencies, run the following from the root directory:
 ```
 python3 execute.py soohyeok_soojee
 ```
 
-### Note:
+## Note:
 If you have any suggestions to improve tourist experience or possible dataset to incorporate onto our project please leave a comment on github or send any of us an e-mail
 - soohyeok@bu.edu
 - soojee@bu.edu
