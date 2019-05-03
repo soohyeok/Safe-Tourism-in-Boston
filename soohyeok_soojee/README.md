@@ -166,6 +166,6 @@ python3 execute.py soohyeok_soojee
 ```
 
 ## Note:
-If you have any suggestions to improve tourist experience or possible dataset to incorporate onto our project please leave a comment on github or send any of us an e-mail
+If you have any suggestions to improve tourist experience or possible dataset to incorporate onto our project please leave a comment on github or send either of us an e-mail
 - soohyeok@bu.edu
 - soojee@bu.edu
