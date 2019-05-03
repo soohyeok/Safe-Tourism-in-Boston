@@ -1,4 +1,4 @@
-# CS504 Project: Proper Boston Tour Documentation
+# Safe Tourism in Boston: Documentation (CS504)
 ### Contributors:
 - Soojee Kim
 - Soohyeok Lee
