@@ -85,7 +85,7 @@ There are different variations for the k-means considering whether the user care
 - K-means algorithm for finding clusters of landmarks and transportations (bus & train) where
 - landmark or transportation coordinates close to crime coordinates are removed 
 - locates K coordinates that are centers of the found clusters 
-![](kmeans_landmark_transportation_crime.png)
+![](kmeans_ltc.png)
 
 ### K-means Analysis
 After running the K-means algorithm, we were able to define hard clusters where the coordinates are clustered. We have tested with various value of K to see if results differ and concluded with the result we see above. This result is useful in that we are able to guide the tourists to best possible locations to travel to, which are marked with 'X' in red color on the images above. The 'X' marks are where the K-means algorithm has clustered the coordinates to, thus there will be highest number of landmarks to visit and transportation to utilize around these marked coordinates. 
