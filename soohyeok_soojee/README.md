@@ -20,7 +20,7 @@ Although we have different datasets of polygons and points, our current project 
 - Massachusetts Department of Transportation (*geo-massdot.opendata.arcgis.com*)
 
 ### Datasets Used:
-1. Boston Neighborhoods (*get_neighborhoods.py*)
+1. Boston Districts (*get_neighborhoods.py*)
 https://data.boston.gov/dataset/city-council-districts
 2. Crime rate (*get_crimeData.py*)  
 https://data.boston.gov/dataset/crime-incident-reports-august-2015-to-date-source-new-system
