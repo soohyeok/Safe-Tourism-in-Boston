@@ -1,6 +1,6 @@
 # Navigate into soohyeok_soojee folder and Check Readme.md
-Soojee and my project is located within the soohyeok_soojee folder but
-initial set-up descriptions for the project is written below
+- Soojee and my project is located within the soohyeok_soojee folder
+- initial set-up descriptions for the project is written below
 
 -------------------------------------------------------------------------------------------------------
 # course-2019-spr-proj
