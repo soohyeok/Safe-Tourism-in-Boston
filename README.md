@@ -1,3 +1,6 @@
+#Navigate into soohyeok_soojee folder and Check Readme.md
+
+-------------------------------------------------------------------------------------------------------
 # course-2019-spr-proj
 Joint repository for the collection of student course projects in the Spring 2019 iteration of the Data Mechanics course at Boston University.
 
